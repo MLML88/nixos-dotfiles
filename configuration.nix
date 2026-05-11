@@ -1,15 +1,14 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # services.getty.autologinUser = "vortex";
+  services.getty.autologinUser = "vortex";
 
   networking.hostName = "nixos-vortex";
   networking.networkmanager.enable = true;
@@ -28,13 +27,19 @@
 
   users.users.vortex = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
+
     packages = with pkgs; [
       tree
     ];
   };
 
   programs.firefox.enable = true;
+
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -46,7 +51,10 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  system.stateVersion = "25.05";
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
+  system.stateVersion = "25.05";
 }

@@ -14,10 +14,19 @@
     enable = true;
 
     package =
-      hyprland.packages.${pkgs.system}.hyprland;
+      hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 
     portalPackage =
-      hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+      hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+
+    settings = {
+      "$mod" = "SUPER";
+
+      bind = [
+        "$mod, Q, exec, kitty"
+        "$mod, M, exit"
+      ];
+    };
   };
 
   programs.bash = {

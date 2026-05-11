@@ -19,29 +19,30 @@
   let
     system = "x86_64-linux";
   in {
-    nixosConfigurations.nixos-vortex = nixpkgs.lib.nixosSystem {
-      inherit system;
+    nixosConfigurations.nixos-vortex =
+      nixpkgs.lib.nixosSystem {
+        inherit system;
 
-      modules = [
-        ./configuration.nix
+        modules = [
+          ./configuration.nix
 
-        home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
 
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
 
-            users.vortex = import ./home.nix;
+              users.vortex = import ./home.nix;
 
-            backupFileExtension = "backup";
+              backupFileExtension = "backup";
 
-            extraSpecialArgs = {
-              inherit hyprland;
+              extraSpecialArgs = {
+                inherit hyprland;
+              };
             };
-          };
-        }
-      ];
-    };
+          }
+        ];
+      };
   };
 }
