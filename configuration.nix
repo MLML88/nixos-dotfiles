@@ -9,7 +9,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.getty.autologinUser = "vortex";
+  # services.getty.autologinUser = "vortex";
 
   networking.hostName = "nixos-vortex";
   networking.networkmanager.enable = true;
@@ -21,6 +21,10 @@
     withUWSM = true;
     xwayland.enable = true;
   };
+
+  security.polkit.enable = true;
+
+  xdg.portal.enable = true;
 
   users.users.vortex = {
     isNormalUser = true;
