@@ -6,6 +6,7 @@
   ];
 
   networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
 
@@ -28,9 +29,10 @@
     waybar
     dmenu
     git
+    neovim
   ];
 
-  security.sudo.wheelNeedsPassword = false;
+  # security.sudo.wheelNeedsPassword = false;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
