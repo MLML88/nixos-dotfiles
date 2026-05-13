@@ -1,16 +1,17 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports =
+    [
+      ./hardware-configuration.nix
+    ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.getty.autologinUser = "vortex";
+  services.getty.autologinUser = "tony";
 
-  networking.hostName = "nixos-vortex";
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
@@ -21,40 +22,25 @@
     xwayland.enable = true;
   };
 
-  security.polkit.enable = true;
-
-  xdg.portal.enable = true;
-
-  users.users.vortex = {
+  users.users.tony = {
     isNormalUser = true;
-
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ];
-
+    extraGroups = [ "wheel" ];
     packages = with pkgs; [
       tree
     ];
   };
 
   programs.firefox.enable = true;
-
   environment.systemPackages = with pkgs; [
     vim
     wget
-    git
+    foot
+    waybar
     kitty
   ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";
+
 }
+

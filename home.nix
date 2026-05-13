@@ -1,44 +1,18 @@
-{ config, pkgs, hyprland, ... }:
+{ config, pkgs, ... }:
 
 {
-  home.username = "vortex";
-  home.homeDirectory = "/home/vortex";
-
+  home.username = "tony";
+  home.homeDirectory = "/home/tony";
   home.stateVersion = "25.05";
-
   programs.git.enable = true;
-
-  programs.kitty.enable = true;
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-
-    package =
-      hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-
-    portalPackage =
-      hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-
-    settings = {
-      "$mod" = "SUPER";
-
-      bind = [
-        "$mod, Q, exec, kitty"
-        "$mod, M, exit"
-      ];
-    };
-  };
-
   programs.bash = {
     enable = true;
-
     shellAliases = {
       btw = "echo i use nixos, btw";
     };
-
     profileExtra = ''
       if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-        exec uwsm start hyprland
+        exec uwsm start -S hyprland-uwsm.desktop
       fi
     '';
   };
