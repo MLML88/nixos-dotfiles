@@ -1,46 +1,38 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  services.getty.autologinUser = "tony";
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
-  };
+  i18n.defaultLocale = "en_US.UTF-8";
 
-  users.users.tony = {
+  services.xserver.enable = true;
+
+  services.displayManager.gdm.enable = true;
+
+  programs.hyprland.enable = true;
+
+  users.users.vortex = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      tree
-    ];
+    initialPassword = "password";
   };
 
-  programs.firefox.enable = true;
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    foot
-    waybar
     kitty
+    waybar
+    dmenu
+    git
   ];
 
+  security.sudo.wheelNeedsPassword = false;
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   system.stateVersion = "25.05";
-
 }
-

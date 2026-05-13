@@ -1,19 +1,52 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "tony";
-  home.homeDirectory = "/home/tony";
+  home.username = "vortex";
+  home.homeDirectory = "/home/vortex";
+
   home.stateVersion = "25.05";
-  programs.git.enable = true;
-  programs.bash = {
+
+  wayland.windowManager.hyprland = {
     enable = true;
-    shellAliases = {
-      btw = "echo i use nixos, btw";
+
+    settings = {
+      monitor = ",preferred,auto,1";
+
+      exec-once = [
+        "waybar"
+      ];
+
+      input = {
+        kb_layout = "us";
+      };
+
+      general = {
+        gaps_in = 5;
+        gaps_out = 10;
+        border_size = 2;
+      };
+
+      decoration = {
+        rounding = 6;
+      };
+
+      misc = {
+        force_default_wallpaper = 0;
+      };
+
+      bind = [
+        "SUPER,Q,exec,kitty"
+        "SUPER,M,exit"
+      ];
     };
-    profileExtra = ''
-      if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-        exec uwsm start -S hyprland-uwsm.desktop
-      fi
-    '';
   };
+
+  programs.kitty.enable = true;
+  programs.waybar.enable = true;
+
+  home.packages = with pkgs; [
+    firefox
+  ];
+
+  programs.home-manager.enable = true;
 }
