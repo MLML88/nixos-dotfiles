@@ -35,8 +35,9 @@
       };
 
       bind = [
-        "SUPER,Q,exec,kitty"
-        "SUPER,M,exit"
+        "SUPER, Return, exec, kitty"
+        "SUPER, Q, killactive,"
+        "SUPER, M, exit"
       ];
     };
   };

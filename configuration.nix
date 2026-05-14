@@ -5,6 +5,9 @@
     ./hardware-configuration.nix
   ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
@@ -31,8 +34,6 @@
     git
     neovim
   ];
-
-  # security.sudo.wheelNeedsPassword = false;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
