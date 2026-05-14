@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
     imports = [
@@ -7,6 +7,7 @@
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.configurationLimit = 5;
 
     networking.hostName = "nixos";
     networking.networkmanager.enable = true;
@@ -15,9 +16,11 @@
 
     i18n.defaultLocale = "en_US.UTF-8";
 
-    services.xserver.enable = true;
+    hardware.bluetooth.enable = true;
 
+    services.xserver.enable = true;
     services.displayManager.gdm.enable = true;
+    services.blueman.enable = true;
 
     programs.hyprland.enable = true;
 
@@ -29,18 +32,22 @@
 
     fonts.packages = with pkgs; [
         noto-fonts
-            noto-fonts-cjk-sans
-            noto-fonts-color-emoji
-            nerd-fonts.jetbrains-mono
+        noto-fonts-cjk-sans
+        noto-fonts-color-emoji
+        nerd-fonts.jetbrains-mono
     ];
 
     environment.systemPackages = with pkgs; [
         kitty
-            waybar
-            dmenu
-            git
-            psmisc
-            neovim
+        git
+        psmisc
+        neovim
+        bluez
+        bluez-tools
+        blueman
+        pavucontrol
+        nautilus
+        inputs.zen-browser.packages.${pkgs.system}.default
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

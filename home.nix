@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
 dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
@@ -10,6 +10,7 @@ configs = {
     kitty = "kitty";
     nvim = "nvim";
     hypr = "hypr";
+    wlogout = "wlogout";
 };
 in
 
@@ -24,6 +25,12 @@ in
         systemd.enable = false; # Stops home manager from auto-gen hyprland.conf
     };
 
+    xdg.userDirs = {
+        enable = true;
+        createDirectories = true;
+        setSessionVariables = true;
+    };
+
     xdg.configFile = builtins.mapAttrs
         (name: subpath: {
          source = link "${dotfiles}/${subpath}";
@@ -31,8 +38,6 @@ in
          }) configs;
 
     home.packages = with pkgs; [
-        kitty
-        firefox
         python3
         python3Packages.pip
         ripgrep
@@ -49,6 +54,16 @@ in
         zoxide
         rofi
         quickshell
+        wlogout
+        hyprsunset
+        hyprlock
+        hyprshot
+        cliphist
+        wl-clipboard
+        wl-clip-persist
+        lazygit
+        awww
+        ddcutil
     ];
 
     programs.home-manager.enable = true;
