@@ -10,6 +10,11 @@ abbr -a gc git commit -a
 abbr -a gp git push
 abbr -a gpl git pull
 abbr -a lg lazygit
+abbr -a test echo "testing"
+
+function set-wall
+    awww img $argv[1] --transition-type grow --transition-duration 2
+end
 
 abbr -a ll ls -alF
 

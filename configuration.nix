@@ -1,48 +1,56 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
+    imports = [
+        ./hardware-configuration.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.configurationLimit = 5;
 
-  services.getty.autologinUser = "vortex";
+    networking.hostName = "nixos";
+    networking.networkmanager.enable = true;
 
-  networking.hostName = "nixos-vortex";
-  networking.networkmanager.enable = true;
+    time.timeZone = "America/New_York";
 
-  time.timeZone = "America/New_York";
+    i18n.defaultLocale = "en_US.UTF-8";
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
-  };
+    hardware.bluetooth.enable = true;
 
-  users.users.vortex = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      tree
+    services.xserver.enable = true;
+    services.displayManager.gdm.enable = true;
+    services.blueman.enable = true;
+
+    programs.hyprland.enable = true;
+
+    users.users.vortex = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ];
+        initialPassword = "password";
+    };
+
+    fonts.packages = with pkgs; [
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-color-emoji
+        nerd-fonts.jetbrains-mono
     ];
-  };
 
-  programs.firefox.enable = true;
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-    kitty
-  ];
+    environment.systemPackages = with pkgs; [
+        kitty
+        git
+        psmisc
+        neovim
+        bluez
+        bluez-tools
+        blueman
+        pavucontrol
+        nautilus
+        inputs.zen-browser.packages.${pkgs.system}.default
+    ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  system.stateVersion = "25.05";
-
+    system.stateVersion = "25.05";
 }

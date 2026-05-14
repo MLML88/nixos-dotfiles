@@ -1,4 +1,18 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
+
+let
+dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+link = path: config.lib.file.mkOutOfStoreSymlink path;
+configs = {
+    rofi = "rofi";
+    fish = "fish";
+    quickshell = "quickshell";
+    kitty = "kitty";
+    nvim = "nvim";
+    hypr = "hypr";
+    wlogout = "wlogout";
+};
+in
 
 let
     dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
@@ -11,35 +25,54 @@ in
 {
     home.username = "vortex";
     home.homeDirectory = "/home/vortex";
+
     home.stateVersion = "25.05";
-    programs.git.enable = true;
-    programs.bash = {
+
+    wayland.windowManager.hyprland = {
         enable = true;
-        shellAliases = {
-            btw = "echo i use nixos, btw";
-        };
-        profileExtra = ''
-            if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-                exec uwsm start -S hyprland-uwsm.desktop
-                    fi
-                    '';
+        systemd.enable = false; # Stops home manager from auto-gen hyprland.conf
+    };
+
+    xdg.userDirs = {
+        enable = true;
+        createDirectories = true;
+        setSessionVariables = true;
     };
 
     xdg.configFile = builtins.mapAttrs
         (name: subpath: {
-            source = create_symlink "${dotfiles}/${subpath}";
-            recursive = true;
-        })
-        configs;
+         source = link "${dotfiles}/${subpath}";
+         recursive = true;
+         }) configs;
 
     home.packages = with pkgs; [
-        neovim
-            ripgrep
-            nil
-            nixpkgs-fmt
-            nodejs
-            npm
-            gcc
-    ]
+        python3
+        python3Packages.pip
+        ripgrep
+        nodejs
+        gcc
+        gnumake
+        cmake
+        wget
+        unzip
+        tree-sitter
+        fd
+        fzf
+        fish
+        zoxide
+        rofi
+        quickshell
+        wlogout
+        hyprsunset
+        hyprlock
+        hyprshot
+        cliphist
+        wl-clipboard
+        wl-clip-persist
+        lazygit
+        awww
+        ddcutil
+    ];
 
+    programs.home-manager.enable = true;
 }
