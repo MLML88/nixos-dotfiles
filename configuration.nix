@@ -5,9 +5,13 @@
         ./hardware-configuration.nix
     ];
 
-    boot.loader.systemd-boot.enable = true;
+    boot.loader.grub.enable = true;
+    boot.loader.grub.efiSupport = true;
+    boot.loader.grub.device = "nodev";
+    boot.loader.grub.useOSProber = true;
+
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.systemd-boot.configurationLimit = 5;
+    boot.loader.grub.configurationLimit = 5;
 
     networking.hostName = "nixos";
     networking.networkmanager.enable = true;
@@ -40,6 +44,7 @@
     environment.systemPackages = with pkgs; [
         kitty
         git
+        less
         psmisc
         neovim
         bluez
