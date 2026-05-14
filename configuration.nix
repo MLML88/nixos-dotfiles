@@ -1,41 +1,49 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+    imports = [
+        ./hardware-configuration.nix
+    ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+    networking.hostName = "nixos";
+    networking.networkmanager.enable = true;
 
-  time.timeZone = "America/New_York";
+    time.timeZone = "America/New_York";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+    i18n.defaultLocale = "en_US.UTF-8";
 
-  services.xserver.enable = true;
+    services.xserver.enable = true;
 
-  services.displayManager.gdm.enable = true;
+    services.displayManager.gdm.enable = true;
 
-  programs.hyprland.enable = true;
+    programs.hyprland.enable = true;
 
-  users.users.vortex = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    initialPassword = "password";
-  };
+    users.users.vortex = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ];
+        initialPassword = "password";
+    };
 
-  environment.systemPackages = with pkgs; [
-    kitty
-    waybar
-    dmenu
-    git
-    neovim
-  ];
+    fonts.packages = with pkgs; [
+        noto-fonts
+            noto-fonts-cjk-sans
+            noto-fonts-color-emoji
+            nerd-fonts.jetbrains-mono
+    ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    environment.systemPackages = with pkgs; [
+        kitty
+            waybar
+            dmenu
+            git
+            psmisc
+            neovim
+    ];
 
-  system.stateVersion = "25.05";
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    system.stateVersion = "25.05";
 }
