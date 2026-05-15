@@ -19,6 +19,7 @@
     hardware.bluetooth.enable = true;
 
     services.xserver.enable = true;
+    services.upower.enable = true;
     services.displayManager.gdm.enable = true;
     services.blueman.enable = true;
 
@@ -46,9 +47,14 @@
         bluez
         bluez-tools
         blueman
+        networkmanagerapplet
         pavucontrol
         nautilus
+        btop
+        python3
+        python3Packages.pip
         inputs.zen-browser.packages.${pkgs.system}.default
+        bibata-cursors
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 let
-    dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+    dotfiles = "${config.home.homeDirectory}/mydotfiles/MLML/.config";
     link = path: config.lib.file.mkOutOfStoreSymlink path;
     configs = {
         rofi = "rofi";
@@ -17,8 +17,16 @@ in
 {
     home.username = "vortex";
     home.homeDirectory = "/home/vortex";
-
     home.stateVersion = "25.05";
+
+    home.pointerCursor = {
+        gtk.enable = true;
+        x11.enable = true;
+
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+        size = 24;
+    };
 
     xdg.userDirs = {
         enable = true;
@@ -33,8 +41,6 @@ in
          }) configs;
 
     home.packages = with pkgs; [
-        python3
-        python3Packages.pip
         ripgrep
         nodejs
         gcc
