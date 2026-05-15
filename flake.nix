@@ -1,5 +1,5 @@
 {
-    description = "Minimal NixOS + Hyprland";
+    description = "Minimal NixOS + Hyprland, Modularized";
 
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -19,15 +19,15 @@
 
     outputs = { self, nixpkgs, home-manager, zen-browser, hyprland, ... } @inputs:
     let
-    system = "x86_64-linux";
+        system = "x86_64-linux";
     in {
-        nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
             inherit system;
 
             specialArgs = {inherit inputs;};
 
             modules = [
-                ./configuration.nix
+                ./hosts/laptop
 
                 hyprland.nixosModules.default
 
@@ -37,7 +37,7 @@
                         useGlobalPkgs = true;
                         useUserPackages = true;
 
-                        users.vortex = import ./home.nix;
+                        users.vortex = import ./home/vortex/home.nix;
                         backupFileExtension = "backup";
                     };
                 }
