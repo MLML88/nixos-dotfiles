@@ -1,24 +1,16 @@
 { config, pkgs, inputs, ... }:
 
 let
-dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
-link = path: config.lib.file.mkOutOfStoreSymlink path;
-configs = {
-    rofi = "rofi";
-    fish = "fish";
-    quickshell = "quickshell";
-    kitty = "kitty";
-    nvim = "nvim";
-    hypr = "hypr";
-    wlogout = "wlogout";
-};
-in
-
-let
     dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
-    create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+    link = path: config.lib.file.mkOutOfStoreSymlink path;
     configs = {
+        rofi = "rofi";
+        fish = "fish";
+        quickshell = "quickshell";
+        kitty = "kitty";
         nvim = "nvim";
+        hypr = "hypr";
+        wlogout = "wlogout";
     };
 in
 
@@ -27,11 +19,6 @@ in
     home.homeDirectory = "/home/vortex";
 
     home.stateVersion = "25.05";
-
-    wayland.windowManager.hyprland = {
-        enable = true;
-        systemd.enable = false; # Stops home manager from auto-gen hyprland.conf
-    };
 
     xdg.userDirs = {
         enable = true;

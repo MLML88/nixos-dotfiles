@@ -38,6 +38,7 @@
     ];
 
     environment.systemPackages = with pkgs; [
+    	hyprland
         kitty
         git
         psmisc
