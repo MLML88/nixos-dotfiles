@@ -2,6 +2,8 @@
 
 {
     hardware.bluetooth.enable = true;
+
+    hardware.enableRedistributableFirmware = true;
     hardware.bluetooth.settings = {
         General = {
             Enable = "Source,Sink,Media,Socket";
@@ -22,5 +24,7 @@
         bluez-tools
         blueman
         pavucontrol
+        usbutils
+        pciutils
     ];
 }

@@ -16,6 +16,8 @@
         noto-fonts-cjk-sans
         noto-fonts-color-emoji
         nerd-fonts.jetbrains-mono
+        source-han-sans
+        source-han-serif
     ];
 
     environment.systemPackages = with pkgs; [
@@ -24,6 +26,7 @@
         git
         neovim
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default
         btop
         psmisc
         nautilus

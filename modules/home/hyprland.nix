@@ -9,6 +9,8 @@ let
         quickshell = "quickshell";
         rofi = "rofi";
         wlogout = "wlogout";
+        fcitx5 = "fcitx5";
+        swaync = "swaync";
     };
 in
 
@@ -46,5 +48,8 @@ in
         wl-clip-persist
         awww
         ddcutil
+        swaynotificationcenter
+        ffmpeg
+        vlc
     ];
 }

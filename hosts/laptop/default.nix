@@ -6,6 +6,7 @@
         ../../modules/system/networking.nix
         ../../modules/system/audio.nix
         ../../modules/system/hyprland.nix
+        ../../modules/system/keyboard.nix
         ../../modules/system/users.nix
     ];
 
