@@ -1,18 +1,18 @@
 { config, pkgs, ...}:
 
-let
-    dotfiles = "${config.home.homeDirectory}/mydotfiles/MLML/.config";
-    link = path: config.lib.file.mkOutOfStoreSymlink path;
-    configs = {
-        hypr = "hypr";
-        kitty = "kitty";
-        quickshell = "quickshell";
-        rofi = "rofi";
-        wlogout = "wlogout";
-        fcitx5 = "fcitx5";
-        swaync = "swaync";
-    };
-in
+# let
+#     dotfiles = "${config.home.homeDirectory}/mydotfiles/MLML/.config";
+#     link = path: config.lib.file.mkOutOfStoreSymlink path;
+#     configs = {
+#         hypr = "hypr";
+#         kitty = "kitty";
+#         quickshell = "quickshell";
+#         rofi = "rofi";
+#         wlogout = "wlogout";
+#         fcitx5 = "fcitx5";
+#         swaync = "swaync";
+#     };
+# in
 
 {
     xdg.userDirs = {
@@ -21,11 +21,11 @@ in
         setSessionVariables = true;
     };
 
-    xdg.configFile = builtins.mapAttrs
-        (name: subpath: {
-         source = link "${dotfiles}/${subpath}";
-         recursive = true;
-         }) configs;
+    # xdg.configFile = builtins.mapAttrs
+    #     (name: subpath: {
+    #      source = link "${dotfiles}/${subpath}";
+    #      recursive = true;
+    #      }) configs;
 
     home.pointerCursor = {
         gtk.enable = true;

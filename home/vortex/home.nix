@@ -4,8 +4,8 @@
     imports = [
         ../../modules/home/shell.nix
         ../../modules/home/hyprland.nix
-        ../../modules/home/lsp_servers.nix
-        ../../modules/home/lsp_formatters.nix
+        # ../../modules/home/lsp_servers.nix
+        # ../../modules/home/lsp_formatters.nix
     ];
 
     home = {
