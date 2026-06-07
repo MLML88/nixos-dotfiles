@@ -36,6 +36,11 @@ in
         size = 24;
     };
 
+    wayland.windowManager.hyprland = {
+        enable = true;
+        systemd.enable = false; # Stops home manager from auto-gen hyprland.conf
+    };
+
     home.packages = with pkgs; [
         rofi
         quickshell
