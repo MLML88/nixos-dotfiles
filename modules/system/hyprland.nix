@@ -41,6 +41,7 @@
     python3
     python3Packages.pip
     bibata-cursors
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     vscodium
     nixfmt
   ];

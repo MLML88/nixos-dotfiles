@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    prismlauncher
+    prismlauncher # Modded Minecraft
+    discord
   ];
 }

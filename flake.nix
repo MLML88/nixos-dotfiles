@@ -9,20 +9,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # zen-browser = {
-    #     url = "github:youwen5/zen-browser-flake";
-    #     inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    # hyprland.url = "github:hyprwm/Hyprland";
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  # outputs = { self, nixpkgs, home-manager, zen-browser, hyprland, ... } @inputs:
   outputs =
     {
       self,
       nixpkgs,
       home-manager,
+      zen-browser,
       ...
     }@inputs:
     let
@@ -37,7 +35,9 @@
         modules = [
           ./host/asus
 
-          # hyprland.nixosModules.default
+          {
+            nixpkgs.config.allowUnfree = true;
+          }
 
           home-manager.nixosModules.home-manager
           {
