@@ -38,7 +38,7 @@
                         useGlobalPkgs = true;
                         useUserPackages = true;
 
-                        users.excailbur = import ./home/excailbur/home.nix;
+                        users.excalibur = import ./home/excalibur/home.nix;
                         backupFileExtension = "backup";
                     };
                 }
