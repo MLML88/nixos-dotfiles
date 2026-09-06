@@ -7,6 +7,7 @@ let
     nvim = "nvim";
     fish = "fish";
     kitty = "kitty";
+    zathura = "zathura";
   };
 in
 
@@ -18,17 +19,32 @@ in
   }) configs;
 
   home.packages = with pkgs; [
-    ripgrep
-    nodejs
-    gnumake
-    cmake
-    unzip
     wget
-    tree-sitter
-    fd
-    fzf
     fish
     zoxide
     lazygit
+    vscodium
+    nixfmt
+
+    ripgrep
+    nodejs
+    gnumake
+    gcc
+    cmake
+    unzip
+    tree-sitter
+    fd
+    fzf
+    python3
+    python3Packages.pip
+
+    zathura
+    zathuraPkgs.zathura_pdf_poppler
+    (texliveSmall.withPackages (ps: with ps; [
+      latexmk
+      xetex
+      enumitem
+    ]))
+
   ];
 }

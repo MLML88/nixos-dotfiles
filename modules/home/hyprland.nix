@@ -5,7 +5,6 @@ let
   link = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     hypr = "hypr"; # Need to symlink up first before the lsp language servers
-    kitty = "kitty";
     quickshell = "quickshell";
     rofi = "rofi";
     wlogout = "wlogout";
