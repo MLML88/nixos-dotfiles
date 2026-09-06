@@ -24,11 +24,14 @@
         # Asus laptop
         asus = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
 
           modules = [
             ./host/asus
 
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+
+            {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -36,18 +39,22 @@
                 users.excalibur = import ./home/excalibur/home.nix;
                 backupFileExtension = "backup";
               };
-            };
+            }
+
           ];
         };
 
         # School laptop
         school = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
 
           modules = [
             ./host/school
 
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+
+            {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -55,7 +62,8 @@
                 users.vortex = import ./home/vortex/home.nix;
                 backupFileExtension = "backup";
               };
-            };
+            }
+
           ];
         };
 
