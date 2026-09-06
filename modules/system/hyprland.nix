@@ -34,6 +34,7 @@
     git
     neovim
     vim
+    chromium
     btop
     psmisc
     nautilus

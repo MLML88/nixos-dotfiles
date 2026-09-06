@@ -1,7 +1,7 @@
 {
-    users.users.excalibur = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" ];
-        initialPassword = "mushi";
-    };
+  users.users.excalibur = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    initialPassword = "mushi";
+  };
 }
