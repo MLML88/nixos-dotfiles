@@ -9,9 +9,9 @@
     ../../modules/system/keyboard.nix
   ];
 
-  networking.hostName = "asus";
+  networking.hostName = "school";
 
-  users.users.excalibur = {
+  users.users.vortex = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     initialPassword = "mushi";

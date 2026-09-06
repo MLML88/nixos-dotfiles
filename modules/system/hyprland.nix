@@ -17,8 +17,12 @@
   };
 
   # Display Manager
-  services.displayManager.regreet.enable = true;
-  services.greetd.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true
+  };
+  # services.displayManager.regreet.enable = true;
+  # services.greetd.enable = true;
 
   fonts.packages = with pkgs; [
     noto-fonts
