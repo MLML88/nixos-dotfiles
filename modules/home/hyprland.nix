@@ -4,7 +4,7 @@ let
     dotfiles = "${config.home.homeDirectory}/mydotfiles/MLML/.config";
     link = path: config.lib.file.mkOutOfStoreSymlink path;
     configs = {
-        # hypr = "hypr";
+        hypr = "hypr";
         kitty = "kitty";
         quickshell = "quickshell";
         rofi = "rofi";
@@ -24,6 +24,7 @@ in
     xdg.configFile = builtins.mapAttrs
         (name: subpath: {
          source = link "${dotfiles}/${subpath}";
+         force = true;
          recursive = true;
          }) configs;
 

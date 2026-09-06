@@ -40,5 +40,7 @@
     python3
     python3Packages.pip
     bibata-cursors
+    vscodium
+    nixfmt
   ];
 }

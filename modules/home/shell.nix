@@ -13,6 +13,7 @@ in
     xdg.configFile = builtins.mapAttrs
         (name: subpath: {
          source = link "${dotfiles}/${subpath}";
+         force = true;
          recursive = true;
          }) configs;
 
