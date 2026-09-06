@@ -4,7 +4,7 @@ let
     dotfiles = "${config.home.homeDirectory}/mydotfiles/MLML/.config";
     link = path: config.lib.file.mkOutOfStoreSymlink path;
     configs = {
-        hypr = "hypr";
+        # hypr = "hypr";
         kitty = "kitty";
         quickshell = "quickshell";
         rofi = "rofi";
@@ -28,6 +28,8 @@ in
          }) configs;
 
     home.pointerCursor = {
+        enable = true;
+
         gtk.enable = true;
         x11.enable = true;
 

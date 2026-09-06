@@ -9,27 +9,28 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        zen-browser = {
-            url = "github:youwen5/zen-browser-flake";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        # zen-browser = {
+        #     url = "github:youwen5/zen-browser-flake";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
 
-        hyprland.url = "github:hyprwm/Hyprland";
+        # hyprland.url = "github:hyprwm/Hyprland";
     };
 
-    outputs = { self, nixpkgs, home-manager, zen-browser, hyprland, ... } @inputs:
+    # outputs = { self, nixpkgs, home-manager, zen-browser, hyprland, ... } @inputs:
+    outputs = { self, nixpkgs, home-manager, ... } @inputs:
     let
         system = "x86_64-linux";
     in {
-        nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.asus = nixpkgs.lib.nixosSystem {
             inherit system;
 
             specialArgs = {inherit inputs;};
 
             modules = [
-                ./hosts/laptop
+                ./host/asus
 
-                hyprland.nixosModules.default
+                # hyprland.nixosModules.default
 
                 home-manager.nixosModules.home-manager
                 {
@@ -37,7 +38,7 @@
                         useGlobalPkgs = true;
                         useUserPackages = true;
 
-                        users.vortex = import ./home/vortex/home.nix;
+                        users.excailbur = import ./home/excailbur/home.nix;
                         backupFileExtension = "backup";
                     };
                 }
