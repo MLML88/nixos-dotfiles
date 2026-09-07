@@ -32,7 +32,7 @@
     git
     neovim
     vim
-    chromium
+    brave
     btop
     psmisc
     nautilus
