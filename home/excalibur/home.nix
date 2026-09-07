@@ -5,6 +5,7 @@
     ../../modules/home/game.nix
     ../../modules/home/lsp_servers.nix
     ../../modules/home/lsp_formatters.nix
+    ../../modules/home/claude.nix
   ];
 
   home = {
